@@ -7,6 +7,8 @@ namespace Fractural.CSharpResourceRegistry
 {
 	public static class Settings
 	{
+		public const string PluginName = "FracCSRG";
+
 		public enum ResourceSearchType
 		{
 			Recursive = 0,
@@ -26,7 +28,7 @@ namespace Fractural.CSharpResourceRegistry
 
 		private static object GetSettings(string title)
 		{
-			return ProjectSettings.GetSetting($"{nameof(MonoCustomResourceRegistry)}/{title}");
+			return ProjectSettings.GetSetting($"{PluginName}/{title}");
 		}
 
 		private static void AddSetting(string title, Variant.Type type, object value, PropertyHint hint = PropertyHint.None, string hintString = "")
@@ -44,6 +46,6 @@ namespace Fractural.CSharpResourceRegistry
 			ProjectSettings.AddPropertyInfo(info);
 		}
 
-		private static string SettingPath(string title) => $"{nameof(MonoCustomResourceRegistry)}/{title}";
+		private static string SettingPath(string title) => $"{PluginName}/{title}";
 	}
 }

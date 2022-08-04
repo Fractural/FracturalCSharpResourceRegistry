@@ -1,6 +1,3 @@
-using System.Runtime.InteropServices.ComTypes;
-using System.Security.AccessControl;
-using System.Linq.Expressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +24,7 @@ namespace Fractural.CSharpResourceRegistry
 		{
 			refreshButton = new Button();
 			refreshButton.Text = "CSRG";
-			
+
 			AddControlToContainer(CustomControlContainer.Toolbar, refreshButton);
 			refreshButton.Icon = refreshButton.GetIcon("Reload", "EditorIcons");
 			refreshButton.Connect("pressed", this, nameof(OnRefreshPressed));
@@ -63,23 +60,23 @@ namespace Fractural.CSharpResourceRegistry
 				else
 					AddRegisteredType(type, nameof(Node), file);
 		}
-		
+
 		private void AddRegisteredType(Type type, string defaultBaseTypeName, File file)
 		{
-			RegisteredTypeAttribute attribute = (RegisteredTypeAttribute) Attribute.GetCustomAttribute(type, typeof(RegisteredTypeAttribute));
+			RegisteredTypeAttribute attribute = (RegisteredTypeAttribute)Attribute.GetCustomAttribute(type, typeof(RegisteredTypeAttribute));
 			String path = FindClassPath(type);
 			if (path == null && !file.FileExists(path))
 				return;
-			
+
 			Script script = GD.Load<Script>(path);
 			if (script == null)
 				return;
-			
+
 			string baseTypeName = defaultBaseTypeName;
 			if (attribute.baseType != "")
 				baseTypeName = attribute.baseType;
-			
-				ImageTexture icon = null;
+
+			ImageTexture icon = null;
 			string iconPath = attribute.iconPath;
 			if (iconPath == "")
 			{
@@ -95,7 +92,7 @@ namespace Fractural.CSharpResourceRegistry
 					baseType = baseType.BaseType;
 				}
 			}
-			
+
 			if (iconPath != "")
 			{
 				if (file.FileExists(iconPath))
@@ -104,13 +101,15 @@ namespace Fractural.CSharpResourceRegistry
 					if (rawIcon != null)
 					{
 						Image image = rawIcon.GetData();
-						int length = (int) Mathf.Round(16 * GetEditorInterface().GetEditorScale());
+						int length = (int)Mathf.Round(16 * GetEditorInterface().GetEditorScale());
 						image.Resize(length, length);
 						icon = new ImageTexture();
 						icon.CreateFromImage(image);
-					} else
+					}
+					else
 						GD.PushError($"Could not load the icon for the registered type \"{type.FullName}\" at path \"{path}\".");
-				} else 
+				}
+				else
 					GD.PushError($"The icon path of \"{path}\" for the registered type \"{type.FullName}\" does not exist.");
 			}
 
@@ -166,7 +165,7 @@ namespace Fractural.CSharpResourceRegistry
 				while (true)
 				{
 					var fileOrDirName = dir.GetNext();
-					
+
 					// Skips hidden files like .
 					if (fileOrDirName == "")
 						break;
@@ -191,8 +190,8 @@ namespace Fractural.CSharpResourceRegistry
 		private static IEnumerable<Type> GetCustomRegisteredTypes()
 		{
 			var assembly = Assembly.GetAssembly(typeof(Plugin));
-			return assembly.GetTypes().Where(t => !t.IsAbstract 
-				&& Attribute.IsDefined(t, typeof(RegisteredTypeAttribute)) 
+			return assembly.GetTypes().Where(t => !t.IsAbstract
+				&& Attribute.IsDefined(t, typeof(RegisteredTypeAttribute))
 				&& (t.IsSubclassOf(typeof(Node)) || t.IsSubclassOf(typeof(Resource)))
 				);
 		}
