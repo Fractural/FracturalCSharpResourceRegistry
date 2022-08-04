@@ -1,5 +1,3 @@
-using System;
-using Fractural;
 using WAT;
 
 namespace Tests
@@ -9,7 +7,7 @@ namespace Tests
 		[Test]
 		public void Empty()
 		{
-
+			Assert.IsTrue(true);
 		}
 	}
 }
