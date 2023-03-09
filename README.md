@@ -1,3 +1,7 @@
+## Arhive Notice ⚠️
+
+This repository has been archived since resource registering functionality has been moved directly into [FracturalCommons](https://github.com/Fractural/FracturalCommons).
+
 # FracturalCSharpResourceRegistry
 
 ![Deploy](https://github.com/Fractural/FracturalCSharpResourceRegistry/actions/workflows/deploy.yml/badge.svg) ![Unit Tests](https://github.com/Fractural/FracturalCSharpResourceRegistry/actions/workflows/tests.yml/badge.svg)
