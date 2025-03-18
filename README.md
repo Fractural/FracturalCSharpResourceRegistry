@@ -1,6 +1,6 @@
-## Arhive Notice ⚠️
+> [!Warning]
+> This addon is deprecated now that Godot supports adding C# classes through the [`[global]`](https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_global_classes.html) attribute.
 
-This repository has been archived since resource registering functionality has been moved directly into [FracturalCommons](https://github.com/Fractural/FracturalCommons).
 
 # FracturalCSharpResourceRegistry
 
